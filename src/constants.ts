@@ -1,4 +1,4 @@
-export const baseURL = 'https://otakudesu.watch';
+export const baseURL = 'https://otakudesu.blog';
 export const ListEndpoint = {
   genreList: './genre-list',
   ongoing: './ongoing-anime',
