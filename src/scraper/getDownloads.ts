@@ -1,50 +1,50 @@
-import { load } from 'cheerio';
-import * as phin from 'phin';
-import { Download } from '../types';
-import { OtakUtil } from '../util';
+import axios from "axios"
+import { load } from "cheerio"
+import { Download } from "../types"
+import { OtakUtil } from "../util"
 
 export const getDownloads = async (
   requestUrl: string,
   url: string
 ): Promise<Download[]> => {
-  if (!OtakUtil.validateDownloadUrl(url)) return [];
 
-  const response = await phin({
-    url: new URL(url, requestUrl),
-  });
+  if (!OtakUtil.validateDownloadUrl(url)) return []
 
-  const $ = load(response.body.toString('utf8'));
+  const { data } = await axios.get(new URL(url, requestUrl).toString())
+  const $ = load(data)
 
-  if (!$('title').text().trim().match(/otaku/gi)) return [];
+  if (!$("title").text().trim().match(/otaku/gi)) return []
 
-  const downloads = $(
+  const downloads: Download[] = $(
     url.match(/batch/gi)
-      ? '.batchlink > ul > li'
-      : '#venkonten > .venser > .venutama > .download > ul > li'
+      ? ".batchlink > ul > li"
+      : "#venkonten > .venser > .venutama > .download > ul > li"
   )
     .map((_, el) => {
-      const resolution = $(el).find('strong').text().trim();
+      const resolution = $(el).find("strong").text().trim()
 
       const links = $(el)
-        .find('a')
+        .find("a")
         .map((_, el2) => ({
           name: $(el2).text().trim(),
-          url: $(el2).attr('href') as string,
+          url: $(el2).attr("href") as string,
         }))
-        .toArray();
+        .toArray()
 
       return {
         resolution: `Mp4 ${resolution}`,
         links,
-      };
+      }
     })
-    .toArray<Download>();
+    .toArray()
 
-  if (url.match(/lengkap/gi) && new Set(downloads).size !== downloads.length) {
-    $('#venkonten > .download > h4').each((index, element) => {
-      downloads[index]['title'] = $(element).text().trim();
-    });
+  if (url.match(/lengkap/gi) && new Set(downloads.map(d => d.resolution)).size !== downloads.length) {
+    $("#venkonten > .download > h4").each((index, element) => {
+      if (downloads[index]) {
+        downloads[index]["title"] = $(element).text().trim()
+      }
+    })
   }
 
-  return downloads;
+  return downloads
 }
