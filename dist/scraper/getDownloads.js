@@ -8,33 +8,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDownloads = void 0;
+
+const axios_1 = require("axios");
 const cheerio_1 = require("cheerio");
-const phin = require("phin");
-const util_1 = require("../util");
-const getDownloads = (requestUrl, url) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!util_1.OtakUtil.validateDownloadUrl(url))
-        return [];
-    const response = yield phin({
-        url: new URL(url, requestUrl),
-    });
-    const $ = (0, cheerio_1.load)(response.body.toString('utf8'));
-    if (!$('title').text().trim().match(/otaku/gi))
-        return [];
-    const downloads = $(url.match(/batch/gi) ? '.batchlink > ul > li' :
-        '#venkonten > .venser > .venutama > .download > ul > li').map((_, el) => ({
-        resolution: $(el).find('strong').text().trim(),
-        links: $(el).find('a').map((_, el2) => ({
-            name: $(el2).text().trim(),
-            url: $(el2).attr('href'),
-        })).toArray(),
-    })).toArray();
-    if (url.match(/lengkap/gi) && new Set(downloads).size !== downloads.length) {
-        $('#venkonten > .download > h4').each((index, element) => {
-            downloads[index]['title'] = $(element).text().trim();
+
+const getDownloads = (url) => __awaiter(void 0, void 0, void 0, function* () {
+    const { data } = yield (0, axios_1.default).get(url);
+    const $ = (0, cheerio_1.load)(data);
+    const urls = {};
+    $("div.download > ul > li").each((i, e) => {
+        const resolution = $(e).find("strong").text().trim();
+        $(e).find("a").each((_i, _e) => {
+            urls[resolution] = urls[resolution] ? urls[resolution] : [];
+            urls[resolution].push({
+                name: $(_e).text().trim(),
+                url: $(_e).attr("href"),
+            });
         });
-    }
-    return downloads;
+    });
+    const result = Object.keys(urls).map(res => ({
+        resolution: `Mp4 ${res}`,
+        links: urls[res]
+    }));
+    return result;
 });
+
 exports.getDownloads = getDownloads;
