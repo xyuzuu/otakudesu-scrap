@@ -15,9 +15,10 @@ If you use ES Module/TypeScript. Just type:
 
 ```ts
 import { OtakudesuInstance } from 'otakudesu-scraper';
-
 const otaku = new OtakudesuInstance();
-otaku.getAnime('Boruto').then(console.log);
+
+await otaku.getAnime('tensei shitara') // for search result
+.then(v => v[0].extra()) // for detail anime
 ```
 
 And, if you use CommonJS. Just follow the codes above, and change `import { OtakudesuInstance } from 'otakudesu-scraper';` to `const { OtakudesuInstance } = require('otakudesu-scraper');`
