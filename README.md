@@ -1,4 +1,4 @@
-![otakudesu-scrape](https://socialify.git.ci/xyuzuu/otakudesu-scrap/image?description=1&forks=1&issues=1&language=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark)
+![otakudesu](https://socialify.git.ci/xyuzuu/otakudesu-scrap/image?description=1&forks=1&issues=1&language=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark)
 
 # Installation
 
@@ -21,11 +21,11 @@ await otaku.getAnime('tensei shitara') // for search result
 .then(v => v[0].extra()) // for detail anime
 ```
 
-And, if you use CommonJS. Just follow the codes above, and change `import { OtakudesuInstance } from 'otakudesu-scraper';` to `const { OtakudesuInstance } = require('otakudesu-scraper');`
+And, if you use CommonJS. Just follow the codes above, and change `import { OtakudesuInstance } from 'otakudes';` to `const { OtakudesuInstance } = require('otakudes');`
 
 ## Documentation
 Need documentation? [Check this out!](https://hansputera.github.io/otakudesu-scrape)
 
 ## Contribution, and issues
-Contributions are welcome, and if you have any issues with this package, you are welcome to open the issue on the [github repository](https://github.com/hansputera/otakudesu-scrape/issues).
+Contributions are welcome, and if you have any issues with this package, you are welcome to open the issue on the [github repository](https://github.com/xyuzuu/otakudesu-scrap/issues).
 
