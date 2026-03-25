@@ -14,7 +14,7 @@ Basically, it is very simple to use.
 If you use ES Module/TypeScript. Just type:
 
 ```ts
-import { OtakudesuInstance } from 'otakudesu-scraper';
+import { OtakudesuInstance } from 'otakudes';
 const otaku = new OtakudesuInstance();
 
 await otaku.getAnime('tensei shitara') // for search result
