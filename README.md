@@ -2,11 +2,11 @@
 
 # Installation
 
-> npm i otakudesu-scraper --only=production
+> npm i otakudes@github:xyuzuu/otakudesu-scrap
 
 or
 
-> yarn add otakudesu-scraper --production
+> yarn add otakudes@github:xyuzuu/otakudesu-scrap
 
 ## Quick Start
 Basically, it is very simple to use.
