@@ -16,7 +16,6 @@ export const getHomeUpdates = async (requestUrl: string):
             $(el).find('.epztipe').text().trim(),
          ),
          url: $(el).find('.thumb > a').attr('href') as string,
-         slug: $(el).find('.thumb > a').attr('href')?.split('/')
-            .filter((s) => s.length).pop(),
+         slug: $(el).find('.thumb > a').attr('href')?.split('/').filter((s) => s.length).pop(),
       }) as HomeAnimeUpdate).toArray();
    };
