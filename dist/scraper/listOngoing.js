@@ -14,23 +14,16 @@ const cheerio_1 = require("cheerio");
 const phin = require("phin");
 const constants_1 = require("../constants");
 const util_1 = require("../util");
-const getOngoingList = (requestUrl) => __awaiter(void 0, void 0, void 0, function* () {
-    const response = yield phin({
-        url: new URL(constants_1.ListEndpoint.ongoing, requestUrl),
-    });
-    const $ = (0, cheerio_1.load)(response.body.toString('utf8'));
-    return $('.venz > ul > li').map((_, element) => ({
-        episode: parseInt($(element).find('.detpost > .epz').text()
-            .replace(/[a-z]/gi, '').trim()),
-        releaseAt: util_1.OtakUtil.resolveReleaseDate($(element).find('.detpost > .newnime').text().trim() +
-            ' ' + $(element).find('.detpost > .epztipe').text().trim()),
-        image: $(element).find('.detpost > .thumb > a > .thumbz > img')
-            .attr('src'),
-        name: $(element).find('.detpost > .thumb > a > .thumbz > .jdlflm')
-            .text().trim(),
-        url: $(element).find('.detpost > .thumb > a').attr('href'),
-        slug: $(element).find('.detpost > .thumb > a').attr('href')
-            .split('/').filter((s) => s.length).pop(),
-    })).toArray();
+const getOngoingList = (requestUrl) => __awaiter(void 0, void 0, void 0, function*() {
+   const response = yield phin({ url: new URL(constants_1.ListEndpoint.ongoing, requestUrl) });
+   const $ = (0, cheerio_1.load)(response.body.toString('utf8'));
+   return $('.venz > ul > li').map((_, element) => ({
+      episode: parseInt($(element).find('.detpost > .epz').text().replace(/[a-z]/gi, '').trim()),
+      releaseAt: util_1.OtakUtil.resolveReleaseDate($(element).find('.detpost > .newnime').text().trim() + ' ' + $(element).find('.detpost > .epztipe').text().trim()),
+      image: $(element).find('.detpost > .thumb > a > .thumbz > img').attr('src'),
+      name: $(element).find('.detpost > .thumb > a > .thumbz > .jdlflm').text().trim(),
+      url: $(element).find('.detpost > .thumb > a').attr('href'),
+      slug: $(element).find('.detpost > .thumb > a').attr('href').split('/').filter((s) => s.length).pop(),
+   })).toArray();
 });
 exports.getOngoingList = getOngoingList;
