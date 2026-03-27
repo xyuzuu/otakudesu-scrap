@@ -13,21 +13,18 @@ exports.getHomeUpdates = void 0;
 const cheerio_1 = require("cheerio");
 const phin = require("phin");
 const util_1 = require("../util");
-const getHomeUpdates = (requestUrl) => __awaiter(void 0, void 0, void 0, function* () {
-    const response = yield phin({
-        url: requestUrl,
-    });
-    const $ = (0, cheerio_1.load)(response.body.toString('utf8'));
-    return $('.venz > ul > li').map((_, el) => {
-        var _a;
-        return ({
-            name: $(el).find('.thumb > a > .thumbz > .jdlflm').text().trim(),
-            image: $(el).find('.thumb > a > .thumbz > img').attr('src'),
-            releaseAt: util_1.OtakUtil.resolveReleaseDate($(el).find('.newnime').text().trim() + ' ' +
-                $(el).find('.epztipe').text().trim()),
-            url: $(el).find('.thumb > a').attr('href'),
-            slug: (_a = $(el).find('.thumb > a').attr('href')) === null || _a === void 0 ? void 0 : _a.split('/').filter((s) => s.length).pop(),
-        });
-    }).toArray();
+const getHomeUpdates = (requestUrl) => __awaiter(void 0, void 0, void 0, function*() {
+   const response = yield phin({ url: requestUrl });
+   const $ = (0, cheerio_1.load)(response.body.toString('utf8'));
+   return $('.venz > ul > li').map((_, el) => {
+      var _a;
+      return ({
+         name: $(el).find('.thumb > a > .thumbz > .jdlflm').text().trim(),
+         image: $(el).find('.thumb > a > .thumbz > img').attr('src'),
+         releaseAt: util_1.OtakUtil.resolveReleaseDate($(el).find('.newnime').text().trim() + ' ' + $(el).find('.epztipe').text().trim()),
+         url: $(el).find('.thumb > a').attr('href'),
+         slug: (_a = $(el).find('.thumb > a').attr('href')) === null || _a === void 0 ? void 0 : _a.split('/').filter((s) => s.length).pop(),
+      });
+   }).toArray();
 });
 exports.getHomeUpdates = getHomeUpdates;
