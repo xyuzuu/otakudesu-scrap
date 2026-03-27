@@ -7,7 +7,7 @@ import {
    getOngoingList,
    getDownloads,
    getHomeUpdates,
-   getAnimeStream,
+   getAnimeStream
 } from './scraper';
 import type {
    Genre,
@@ -15,7 +15,7 @@ import type {
    OngoingAnime,
    ExtraAnime,
    Download,
-   HomeAnimeUpdate,
+   HomeAnimeUpdate
 } from './types';
 
 /**
