@@ -1,12 +1,9 @@
 export const baseURL = 'https://otakudesu.blog';
 export const ListEndpoint = {
-  genreList: './genre-list',
-  ongoing: './ongoing-anime',
-  animeList: './anime-list',
+   genreList: './genre-list',
+   ongoing: './ongoing-anime',
+   animeList: './anime-list',
 };
-export const getAnimeEndpoint = (anime: string) =>
-  `./anime/${encodeURIComponent(anime)}`;
-export const getGenreEndpoint = (genre: string) =>
-  `./genres/${encodeURIComponent(genre)}`;
-export const getSearchAnimeEndpoint = (anime: string) =>
-  `./?s=${encodeURIComponent(anime)}&post_type=anime`;
+export const getAnimeEndpoint = (anime: string) => `./anime/${encodeURIComponent(anime)}`;
+export const getGenreEndpoint = (genre: string) => `./genres/${encodeURIComponent(genre)}`;
+export const getSearchAnimeEndpoint = (anime: string) => `./?s=${encodeURIComponent(anime)}&post_type=anime`;
