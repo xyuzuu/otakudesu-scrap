@@ -17,8 +17,7 @@ If you use ES Module/TypeScript. Just type:
 import { OtakudesuInstance } from 'otakudes';
 const otaku = new OtakudesuInstance();
 
-await otaku.getAnime('tensei shitara') // for search result
-.then(v => v[0].extra()) // for detail anime
+await otaku.getAnime('tensei shitara')
 ```
 
 And, if you use CommonJS. Just follow the codes above, and change `import { OtakudesuInstance } from 'otakudes';` to `const { OtakudesuInstance } = require('otakudes');`
