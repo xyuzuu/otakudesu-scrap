@@ -1,7 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {
-   value: true
-});
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.OtakudesuInstance = void 0;
 const constants_1 = require("./constants");
 const scraper_1 = require("./scraper");
